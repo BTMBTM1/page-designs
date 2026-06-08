@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BTM Designs — Urban Luxury</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23E8C96A'/%3E%3Cstop offset='50%25' stop-color='%23C9A84C'/%3E%3Cstop offset='100%25' stop-color='%238A6B2A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia%2C serif' font-size='28' font-weight='900' fill='url(%23g)' letter-spacing='-1'%3EBTM%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8A6B2A;
+    --black: #0A0A0A;
+    --black-mid: #111111;
+    --black-card: #161616;
+    --black-border: #242424;
+    --white: #F5F0E8;
+    --white-dim: #A89F8C;
+    --font-en: 'Rajdhani', sans-serif;
+    --font-heading: 'Bebas Neue', cursive;
+    --font-ar: 'Noto Kufi Arabic', sans-serif;
+    --radius: 4px;
+    --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-en);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  body.ar {
+    font-family: var(--font-ar);
+    direction: rtl;
+  }
+
+  /* ─── CUSTOM CURSOR ─────────────────────────────── */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.4s, height 0.4s, border-color 0.3s;
+    opacity: 0.6;
+  }
+
+  /* ─── NOISE OVERLAY ─────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 5vw, 60px);
+    height: 70px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--black-border);
+    transition: background var(--transition);
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-badge {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-dim) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--black);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(201,168,76,0.4);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-main {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .logo-sub {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  body.ar .logo-sub { letter-spacing: 1px; }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 36px);
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--white-dim);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color var(--transition);
+    position: relative;
+    font-weight: 500;
+  }
+
+  body.ar nav a { letter-spacing: 0; font-size: 14px; }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+  }
+
+  nav a:hover { color: var(--gold); }
+  nav a:hover::after { transform: scaleX(1); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    border-radius: 20px;
+    padding: 3px;
+    overflow: hidden;
+  }
+
+  .lang-btn {
+    padding: 5px 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--white-dim);
+    border-radius: 16px;
+    transition: all 0.25s;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .lang-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--black);
+  }
+
+  /* ─── HERO ───────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px clamp(20px, 8vw, 120px) 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 15% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 85% 20%, rgba(201,168,76,0.03) 0%, transparent 60%),
+      var(--black);
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  body.ar .hero-eyebrow { letter-spacing: 2px; }
+
+  .hero-btm-logo {
+    width: clamp(120px, 22vw, 200px);
+    height: clamp(80px, 14vw, 130px);
+    margin: 0 auto 32px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s ease forwards;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.5));
+    position: relative;
+  }
+
+  .btm-svg-logo {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 10vw, 110px);
+    letter-spacing: clamp(4px, 2vw, 20px);
+    line-height: 0.9;
+    background: linear-gradient(180deg, #fff 0%, var(--gold-light) 40%, var(--gold) 70%, var(--gold-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
+  }
+
+  body.ar .hero-title {
+    font-family: var(--font-ar);
+    font-size: clamp(36px, 7vw, 80px);
+    letter-spacing: 0;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(12px, 2vw, 17px);
+    letter-spacing: clamp(2px, 1vw, 6px);
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s ease forwards;
+  }
+
+  body.ar .hero-subtitle { letter-spacing: 1px; font-size: 16px; }
+
+  .hero-desc {
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: var(--white-dim);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s ease forwards;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 44px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--black);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all var(--transition);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.95s ease forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body.ar .hero-cta { letter-spacing: 1px; font-family: var(--font-ar); font-weight: 700; }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold-light), #fff);
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+  }
+
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta:hover { box-shadow: 0 0 40px rgba(201,168,76,0.6); }
+  .hero-cta span { position: relative; z-index: 1; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.3s ease forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  .scroll-text {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+  }
+
+  /* ─── SECTION COMMON ─────────────────────────────── */
+  section {
+    padding: clamp(60px, 10vh, 120px) clamp(20px, 8vw, 120px);
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  body.ar .section-label { letter-spacing: 1px; font-size: 12px; flex-direction: row-reverse; }
+
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  body.ar .section-label::before { display: none; }
+  body.ar .section-label::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 6vw, 72px);
+    letter-spacing: clamp(2px, 1vw, 8px);
+    background: linear-gradient(135deg, #fff, var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 60px;
+  }
+
+  body.ar .section-title {
+    font-family: var(--font-ar);
+    font-size: clamp(28px, 5vw, 60px);
+    letter-spacing: 0;
+    font-weight: 900;
+  }
+
+  /* ─── PORTFOLIO ──────────────────────────────────── */
+  #portfolio { background: var(--black-mid); }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  body.ar .filter-bar { flex-direction: row-reverse; }
+
+  .filter-btn {
+    padding: 9px 22px;
+    border: 1px solid var(--black-border);
+    background: transparent;
+    color: var(--white-dim);
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s;
+    font-weight: 600;
+  }
+
+  body.ar .filter-btn { letter-spacing: 0; font-size: 13px; }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-color: var(--gold);
+    color: var(--black);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: var(--radius);
+    background: var(--black-card);
+    transition: transform var(--transition);
+  }
+
+  .portfolio-item:hover { transform: translateY(-4px); }
+
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .portfolio-item:hover img { transform: scale(1.08); }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.3) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+  }
+
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  .portfolio-featured {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--black);
+    font-size: 9px;
+    letter-spacing: 3px;
+    padding: 5px 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  body.ar .portfolio-featured { right: auto; left: 16px; letter-spacing: 0; font-size: 11px; }
+
+  .portfolio-cat {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  body.ar .portfolio-cat { letter-spacing: 0; font-size: 12px; }
+
+  .portfolio-title {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 2.5vw, 24px);
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  body.ar .portfolio-title {
+    font-family: var(--font-ar);
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  .portfolio-desc {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .portfolio-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  body.ar .portfolio-view-btn { letter-spacing: 0; flex-direction: row-reverse; }
+
+  /* ─── CATEGORIES ─────────────────────────────────── */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .category-card {
+    aspect-ratio: 1;
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .category-card:hover { border-color: var(--gold-dim); transform: translateY(-4px); }
+  .category-card:hover::before { opacity: 1; }
+
+  .cat-icon {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .cat-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  body.ar .cat-name { font-family: var(--font-ar); letter-spacing: 0; font-weight: 700; }
+
+  .cat-count {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  /* ─── ABOUT ──────────────────────────────────────── */
+  #about {
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 8vw, 100px);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    #about { grid-template-columns: 1fr; }
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--black-card);
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-frame-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+      rgba(201,168,76,0.15) 0%,
+      rgba(10,10,10,0.8) 40%,
+      rgba(201,168,76,0.08) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-big-btm {
+    font-family: var(--font-heading);
+    font-size: clamp(80px, 15vw, 160px);
+    letter-spacing: 8px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.6), rgba(201,168,76,0.15));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .about-deco {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 140px;
+    height: 140px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  .about-deco2 {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--gold);
+    opacity: 0.2;
+    transform: rotate(45deg);
+  }
+
+  .about-text-block { position: relative; }
+
+  .about-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+    color: var(--gold);
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+  }
+
+  body.ar .about-quote { font-family: var(--font-ar); letter-spacing: 0; font-weight: 900; }
+
+  .about-body {
+    color: var(--white-dim);
+    font-size: clamp(14px, 1.5vw, 17px);
+    line-height: 1.9;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 40px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 5vw, 52px);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  body.ar .stat-label { letter-spacing: 0; font-size: 12px; }
+
+  /* ─── CONTACT ────────────────────────────────────── */
+  #contact {
+    background: var(--black-mid);
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: clamp(16px, 4vw, 48px);
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all var(--transition);
+    padding: 24px 32px;
+    border: 1px solid var(--black-border);
+    border-radius: var(--radius);
+    background: var(--black-card);
+    min-width: 140px;
+  }
+
+  .contact-link:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  .contact-link-icon { font-size: 28px; }
+
+  .contact-link-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  body.ar .contact-link-label { letter-spacing: 0; font-size: 12px; }
+
+  .contact-link-value {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--black-border);
+    padding: 40px clamp(20px, 8vw, 120px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 20px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--white-dim);
+    letter-spacing: 1px;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  body.ar .footer-tagline { font-family: var(--font-ar); letter-spacing: 0; font-weight: 700; }
+
+  .admin-link-footer {
+    font-size: 11px;
+    color: var(--black-border);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .admin-link-footer:hover { color: var(--white-dim); }
+
+  /* ─── LIGHTBOX ───────────────────────────────────── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(5,5,5,0.97);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    max-height: 90vh;
+  }
+
+  @media (max-width: 900px) {
+    .lightbox-inner { grid-template-columns: 1fr; }
+  }
+
+  .lightbox-media {
+    aspect-ratio: 4/5;
+    max-height: 80vh;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--black-card);
+  }
+
+  .lightbox-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lightbox-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .lb-cat {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  body.ar .lb-cat { letter-spacing: 0; font-size: 12px; }
+
+  .lb-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #fff, var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  body.ar .lb-title { font-family: var(--font-ar); letter-spacing: 0; font-weight: 900; }
+
+  .lb-desc {
+    color: var(--white-dim);
+    font-size: 15px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .lb-date {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .lb-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--black-border);
+    background: var(--black-card);
+    color: var(--white);
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 1001;
+  }
+
+  .lb-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ─── LIGHTBOX IMAGE NAVIGATOR ───────────────────── */
+  .lb-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .lb-thumb {
+    width: 52px; height: 52px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, opacity 0.2s;
+    opacity: 0.55;
+  }
+
+  .lb-thumb.active { border-color: var(--gold); opacity: 1; }
+  .lb-thumb:hover { opacity: 0.85; }
+
+  /* ─── DOWNLOAD BUTTON ────────────────────────────── */
+  .lb-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--black);
+    border: none;
+    border-radius: 2px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  body.ar .lb-download { font-family: var(--font-ar); letter-spacing: 0; font-size: 16px; }
+
+  .lb-download::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold-light), #fff5d6);
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+  }
+
+  .lb-download:hover::before { transform: translateX(0); }
+  .lb-download:hover { box-shadow: 0 0 30px rgba(201,168,76,0.5); }
+
+  .lb-download span { position: relative; z-index: 1; }
+
+  .lb-download-icon { position: relative; z-index: 1; font-size: 18px; }
+
+  .lb-download-hint {
+    font-size: 11px;
+    color: var(--white-dim);
+    letter-spacing: 2px;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  body.ar .lb-download-hint { letter-spacing: 0; font-size: 12px; }
+
+  /* ─── ANIMATIONS ─────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE NAV ─────────────────────────────────── */
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    nav { display: none; }
+    nav.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--black-mid);
+      border-top: 1px solid var(--black-border);
+      padding: 30px;
+      gap: 20px;
+      z-index: 99;
+    }
+    .mobile-menu-btn { display: flex; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* ─── MARQUEE ────────────────────────────────────── */
+  .marquee-section {
+    overflow: hidden;
+    border-top: 1px solid var(--black-border);
+    border-bottom: 1px solid var(--black-border);
+    padding: 20px 0;
+    background: var(--black-card);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    animation: marquee 25s linear infinite;
+    width: max-content;
+  }
+
+  body.ar .marquee-track { animation-direction: reverse; }
+
+  .marquee-item {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  body.ar .marquee-item { letter-spacing: 1px; }
+
+  .marquee-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner">
+    <div class="lightbox-media">
+      <img id="lb-img" src="" alt="" />
+    </div>
+    <div class="lightbox-info">
+      <div class="lb-cat" id="lb-cat"></div>
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-desc" id="lb-desc"></div>
+      <div class="lb-date" id="lb-date"></div>
+      <!-- Image navigator thumbnails -->
+      <div class="lb-nav" id="lb-nav"></div>
+      <!-- Download button -->
+      <a class="lb-download" id="lb-download-btn" href="#" download target="_blank" rel="noopener">
+        <span class="lb-download-icon">⬇</span>
+        <span id="lb-download-text">Download Image</span>
+      </a>
+      <div class="lb-download-hint" id="lb-download-hint">High resolution · Free download</div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <a href="#" class="logo-wrap">
+    <div class="logo-badge">BTM</div>
+    <div class="logo-text">
+      <span class="logo-main">BTM</span>
+      <span class="logo-sub" data-en="Designs" data-ar="ديزاينز">Designs</span>
+    </div>
+  </a>
+
+  <nav id="main-nav">
+    <a href="#portfolio" data-en="Portfolio" data-ar="المعرض">Portfolio</a>
+    <a href="#categories" data-en="Categories" data-ar="التصنيفات">Categories</a>
+    <a href="#about" data-en="About" data-ar="من نحن">About</a>
+    <a href="#contact" data-en="Contact" data-ar="التواصل">Contact</a>
+  </nav>
+
+  <div class="header-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR</button>
+    </div>
+    <button class="mobile-menu-btn" id="mob-btn" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-en="Urban Luxury Streetwear" data-ar="ملابس شوارع فاخرة">Urban Luxury Streetwear</div>
+    <div class="hero-btm-logo">
+      <svg class="btm-svg-logo" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E8C96A"/>
+            <stop offset="50%" style="stop-color:#C9A84C"/>
+            <stop offset="100%" style="stop-color:#8A6B2A"/>
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect x="10" y="10" width="260" height="160" rx="30" ry="30" fill="#111111" stroke="#C9A84C" stroke-width="3"/>
+        <text x="140" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="88" font-weight="900"
+          fill="url(#goldGrad)" filter="url(#glow)" letter-spacing="-2">BTM</text>
+        <line x1="40" y1="140" x2="240" y2="140" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+      </svg>
+    </div>
+    <h1 class="hero-title" id="hero-title">BTM DESIGNS</h1>
+    <div class="hero-subtitle" id="hero-subtitle">Urban Luxury. Street Art. Pure Vision.</div>
+    <p class="hero-desc" id="hero-desc">Handcrafted designs born from the streets, elevated to luxury. Each piece tells a story of culture, identity, and artistic mastery.</p>
+    <a href="#portfolio" class="hero-cta"><span id="hero-cta-text">Explore Collection</span> <span>→</span></a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-text">Scroll</div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee-track">
+    <div class="marquee-item"><span data-en="Premium Streetwear" data-ar="ملابس شوارع فاخرة">Premium Streetwear</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Exclusive Designs" data-ar="تصاميم حصرية">Exclusive Designs</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Urban Luxury" data-ar="فخامة حضرية">Urban Luxury</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Street Art Culture" data-ar="ثقافة فن الشوارع">Street Art Culture</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Custom Artwork" data-ar="أعمال فنية مخصصة">Custom Artwork</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Limited Editions" data-ar="إصدارات محدودة">Limited Editions</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Premium Streetwear" data-ar="ملابس شوارع فاخرة">Premium Streetwear</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Exclusive Designs" data-ar="تصاميم حصرية">Exclusive Designs</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Urban Luxury" data-ar="فخامة حضرية">Urban Luxury</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Street Art Culture" data-ar="ثقافة فن الشوارع">Street Art Culture</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Custom Artwork" data-ar="أعمال فنية مخصصة">Custom Artwork</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span data-en="Limited Editions" data-ar="إصدارات محدودة">Limited Editions</span><div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- Portfolio -->
+<section id="portfolio">
+  <div class="section-label"><span data-en="Our Work" data-ar="أعمالنا">Our Work</span></div>
+  <h2 class="section-title reveal" data-en="Portfolio" data-ar="المعرض">Portfolio</h2>
+  <div class="filter-bar reveal" id="filter-bar">
+    <button class="filter-btn active" data-filter="all" data-en="All" data-ar="الكل">All</button>
+    <button class="filter-btn" data-filter="tshirts" data-en="T-Shirts" data-ar="تيشيرتات">T-Shirts</button>
+    <button class="filter-btn" data-filter="drawings" data-en="Drawings" data-ar="رسومات">Drawings</button>
+    <button class="filter-btn" data-filter="logos" data-en="Logos" data-ar="شعارات">Logos</button>
+    <button class="filter-btn" data-filter="newest" data-en="Newest" data-ar="الأحدث">Newest</button>
+  </div>
+  <div class="portfolio-grid" id="portfolio-grid"></div>
+</section>
+
+<!-- Categories -->
+<section id="categories" style="background:var(--black)">
+  <div class="section-label"><span data-en="Browse By" data-ar="تصفح حسب">Browse By</span></div>
+  <h2 class="section-title reveal" data-en="Categories" data-ar="التصنيفات">Categories</h2>
+  <div class="categories-grid reveal" id="categories-grid">
+    <div class="category-card" onclick="filterByCategory('tshirts')">
+      <div class="cat-icon">👕</div>
+      <div class="cat-name" data-en="T-Shirts" data-ar="تيشيرتات">T-Shirts</div>
+      <div class="cat-count" id="count-tshirts">— pieces</div>
+    </div>
+    <div class="category-card" onclick="filterByCategory('drawings')">
+      <div class="cat-icon">✏️</div>
+      <div class="cat-name" data-en="Drawings" data-ar="رسومات">Drawings</div>
+      <div class="cat-count" id="count-drawings">— pieces</div>
+    </div>
+    <div class="category-card" onclick="filterByCategory('logos')">
+      <div class="cat-icon">🎨</div>
+      <div class="cat-name" data-en="Logos" data-ar="شعارات">Logos</div>
+      <div class="cat-count" id="count-logos">— pieces</div>
+    </div>
+    <div class="category-card" onclick="filterByCategory('all')">
+      <div class="cat-icon">⭐</div>
+      <div class="cat-name" data-en="Featured" data-ar="مميزة">Featured</div>
+      <div class="cat-count" id="count-featured">— pieces</div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-frame">
+      <div class="about-frame-inner">
+        <div class="about-big-btm">BTM</div>
+      </div>
+      <div class="about-deco"></div>
+      <div class="about-deco2"></div>
+    </div>
+  </div>
+  <div class="about-text-block">
+    <div class="section-label"><span data-en="The Artist" data-ar="الفنان">The Artist</span></div>
+    <div class="about-quote reveal" id="about-title">About the Artist</div>
+    <p class="about-body reveal" id="about-text">BTM is a visionary streetwear artist merging urban culture with luxury aesthetics.</p>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <div class="stat-num" id="stat-designs">0</div>
+        <div class="stat-label" data-en="Designs" data-ar="تصميم">Designs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label" data-en="Handcrafted" data-ar="صنع يدوي">Handcrafted</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label" data-en="Creativity" data-ar="إبداع">Creativity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center"><span data-en="Get In Touch" data-ar="تواصل معنا">Get In Touch</span></div>
+    <h2 class="section-title reveal" style="margin-bottom:20px" data-en="Contact" data-ar="التواصل">Contact</h2>
+    <p class="reveal" style="color:var(--white-dim); font-size:16px; line-height:1.8; font-weight:300" id="contact-text">
+      Interested in custom designs or collaborations? Reach out and let's create something extraordinary together.
+    </p>
+    <div class="contact-links reveal">
+      <a href="mailto:btm@designs.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <div class="contact-link-label" data-en="Email" data-ar="البريد">Email</div>
+        <div class="contact-link-value" id="contact-email">btm@designs.com</div>
+      </a>
+      <a href="#" class="contact-link" id="contact-ig-link">
+        <div class="contact-link-icon">📸</div>
+        <div class="contact-link-label" data-en="Instagram" data-ar="انستغرام">Instagram</div>
+        <div class="contact-link-value" id="contact-ig">@btmdesigns</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-copy" data-en="© 2026 BTM Designs. All rights reserved." data-ar="© 2026 BTM ديزاينز. جميع الحقوق محفوظة.">© 2026 BTM Designs. All rights reserved.</div>
+  <div class="footer-tagline" data-en="URBAN LUXURY" data-ar="فخامة حضرية">URBAN LUXURY</div>
+  <a href="btm-admin.html" class="admin-link-footer" data-en="Admin" data-ar="الإدارة">Admin</a>
+</footer>
+
+<script>
+// ── BTMSTORE (inline) ────────────────────────────────────────────
+const BTM_STORE_KEY = 'btm_designs_data';
+
+function btmLoad() {
+  try {
+    const raw = localStorage.getItem(BTM_STORE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return getDefaultData();
+}
+
+function getDefaultData() {
+  return {
+    hero: {
+      en: { title: 'BTM Designs', subtitle: 'Urban Luxury. Street Art. Pure Vision.', description: 'Handcrafted designs born from the streets, elevated to luxury. Each piece tells a story of culture, identity, and artistic mastery.', cta: 'Explore Collection' },
+      ar: { title: 'BTM ديزاينز', subtitle: 'فخامة حضرية. فن الشوارع. رؤية خالصة.', description: 'تصاميم يدوية وُلدت من الشوارع وارتقت إلى مستوى الفخامة. كل قطعة تروي قصة ثقافة وهوية وإتقان فني.', cta: 'استكشف المجموعة' }
+    },
+    siteInfo: { email: 'btm@designs.com', instagram: '@btmdesigns' },
+    about: {
+      en: { title: 'About the Artist', text: 'BTM is a visionary streetwear artist merging urban culture with luxury aesthetics. With years of experience crafting bold, iconic designs, BTM has become a symbol of authentic street art elevated to wearable luxury.' },
+      ar: { title: 'عن الفنان', text: 'BTM هو فنان ملابس الشوارع الرؤيوي الذي يدمج الثقافة الحضرية مع الجماليات الفاخرة. بسنوات من الخبرة في إبداع تصاميم جريئة وأيقونية، أصبح BTM رمزاً لفن الشوارع الأصيل المرتقي إلى مستوى الفخامة.' }
+    },
+    items: [
+      { id: 'item_001', title_en: 'Golden Dragon Tee', title_ar: 'تيشيرت التنين الذهبي', description_en: 'Premium streetwear tee featuring hand-drawn dragon art with metallic gold print.', description_ar: 'تيشيرت فاخر يتميز بفن تنين مرسوم يدوياً مع طباعة ذهبية معدنية.', category: 'tshirts', featured: true, date: '2025-12-01', images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'], videos: [] },
+      { id: 'item_002', title_en: 'Urban Royalty Logo', title_ar: 'شعار الملكية الحضرية', description_en: 'Custom calligraphy logo design merging Arabic art with street typography.', description_ar: 'تصميم شعار خطي مخصص يجمع بين الفن العربي والطباعة الحضرية.', category: 'logos', featured: true, date: '2025-11-15', images: ['https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80'], videos: [] },
+      { id: 'item_003', title_en: 'Street Symphony Drawing', title_ar: 'رسم السيمفونية الحضرية', description_en: 'Intricate pen-and-ink illustration capturing the energy of urban life.', description_ar: 'رسم توضيحي دقيق بالحبر يجسّد طاقة الحياة الحضرية.', category: 'drawings', featured: false, date: '2025-10-20', images: ['https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80'], videos: [] },
+      { id: 'item_004', title_en: 'Gold Rush Collection', title_ar: 'مجموعة حمى الذهب', description_en: 'Exclusive limited-edition tee with foil gold embroidery and urban motifs.', description_ar: 'تيشيرت حصري محدود الإصدار مع تطريز ذهبي بورق الذهب وزخارف حضرية.', category: 'tshirts', featured: true, date: '2025-09-10', images: ['https://images.unsplash.com/photo-1503341338985-95ad71d3ded5?w=800&q=80'], videos: [] },
+      { id: 'item_005', title_en: 'Midnight Graffiti', title_ar: 'غرافيتي منتصف الليل', description_en: 'Bold large-format drawing inspired by classic New York graffiti culture.', description_ar: 'رسم جريء بتنسيق كبير مستوحى من ثقافة الغرافيتي الكلاسيكية في نيويورك.', category: 'drawings', featured: false, date: '2025-08-05', images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'], videos: [] },
+      { id: 'item_006', title_en: 'Crown & Code Brand Mark', title_ar: 'علامة تجارية تاج وكود', description_en: 'Iconic brand identity combining crown symbolism with modern street aesthetics.', description_ar: 'هوية تجارية أيقونية تجمع رمزية التاج مع جماليات الشوارع الحديثة.', category: 'logos', featured: false, date: '2025-07-22', images: ['https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80'], videos: [] }
+    ]
+  };
+}
+
+// ── STATE ─────────────────────────────────────────────────────────
+let currentLang = 'en';
+let currentFilter = 'all';
+let storeData = btmLoad();
+
+// ── LANGUAGE ──────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.classList.toggle('ar', lang === 'ar');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+  // Update all data-en / data-ar elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+  });
+
+  // Update dynamic content
+  updateHero();
+  updateAbout();
+  updatePortfolio();
+  updateContactInfo();
+}
+
+// ── HERO ──────────────────────────────────────────────────────────
+function updateHero() {
+  const h = storeData.hero[currentLang] || storeData.hero.en;
+  const titleEl = document.getElementById('hero-title');
+  const subtitleEl = document.getElementById('hero-subtitle');
+  const descEl = document.getElementById('hero-desc');
+  const ctaEl = document.getElementById('hero-cta-text');
+  if (titleEl) titleEl.textContent = h.title;
+  if (subtitleEl) subtitleEl.textContent = h.subtitle;
+  if (descEl) descEl.textContent = h.description;
+  if (ctaEl) ctaEl.textContent = h.cta;
+}
+
+// ── ABOUT ─────────────────────────────────────────────────────────
+function updateAbout() {
+  const a = storeData.about[currentLang] || storeData.about.en;
+  const titleEl = document.getElementById('about-title');
+  const textEl = document.getElementById('about-text');
+  if (titleEl) titleEl.textContent = a.title;
+  if (textEl) textEl.textContent = a.text;
+}
+
+// ── CONTACT ───────────────────────────────────────────────────────
+function updateContactInfo() {
+  const si = storeData.siteInfo || {};
+  const emailEl = document.getElementById('contact-email');
+  const igEl = document.getElementById('contact-ig');
+  const igLink = document.getElementById('contact-ig-link');
+  if (emailEl && si.email) emailEl.textContent = si.email;
+  if (igEl && si.instagram) igEl.textContent = si.instagram;
+  if (igLink && si.instagram) {
+    const handle = si.instagram.replace('@', '');
+    igLink.href = 'https://instagram.com/' + handle;
+    igLink.target = '_blank';
+    igLink.rel = 'noopener noreferrer';
+  }
+}
+
+// ── PORTFOLIO ─────────────────────────────────────────────────────
+function getCatLabel(cat) {
+  const map = {
+    tshirts: { en: 'T-Shirts', ar: 'تيشيرتات' },
+    drawings: { en: 'Drawings', ar: 'رسومات' },
+    logos: { en: 'Logos', ar: 'شعارات' }
+  };
+  return (map[cat] && map[cat][currentLang]) || cat;
+}
+
+function renderPortfolio(items) {
+  const grid = document.getElementById('portfolio-grid');
+  if (!grid) return;
+
+  if (!items.length) {
+    grid.innerHTML = `<p style="color:var(--white-dim);grid-column:1/-1;text-align:center;padding:60px 0">${currentLang === 'ar' ? 'لا توجد تصاميم بعد' : 'No designs yet'}</p>`;
+    return;
+  }
+
+  grid.innerHTML = items.map(item => {
+    const title = item['title_' + currentLang] || item.title_en;
+    const desc = item['description_' + currentLang] || item.description_en;
+    const img = (item.images && item.images[0]) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80';
+    const cat = getCatLabel(item.category);
+    const featuredLabel = currentLang === 'ar' ? 'مميز' : 'Featured';
+    const viewLabel = currentLang === 'ar' ? 'عرض ←' : 'View →';
+
+    return `
+      <div class="portfolio-item" onclick="openLightbox('${item.id}')">
+        <img src="${img}" alt="${title}" loading="lazy" />
+        ${item.featured ? `<div class="portfolio-featured">${featuredLabel}</div>` : ''}
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">${cat}</div>
+          <div class="portfolio-title">${title}</div>
+          <div class="portfolio-desc">${desc}</div>
+          <div class="portfolio-view-btn">${viewLabel}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updatePortfolio() {
+  let items = [...(storeData.items || [])];
+  if (currentFilter === 'newest') {
+    items.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else if (currentFilter !== 'all') {
+    items = items.filter(i => i.category === currentFilter);
+  }
+  renderPortfolio(items);
+  updateCounts();
+}
+
+function updateCounts() {
+  const items = storeData.items || [];
+  const tshirts = items.filter(i => i.category === 'tshirts').length;
+  const drawings = items.filter(i => i.category === 'drawings').length;
+  const logos = items.filter(i => i.category === 'logos').length;
+  const featured = items.filter(i => i.featured).length;
+  const pcs = currentLang === 'ar' ? 'قطعة' : 'pieces';
+  const setCount = (id, n) => { const el = document.getElementById(id); if(el) el.textContent = n + ' ' + pcs; };
+  setCount('count-tshirts', tshirts);
+  setCount('count-drawings', drawings);
+  setCount('count-logos', logos);
+  setCount('count-featured', featured);
+  const statEl = document.getElementById('stat-designs');
+  if (statEl) statEl.textContent = items.length + '+';
+}
+
+// ── FILTERS ───────────────────────────────────────────────────────
+document.getElementById('filter-bar').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  updatePortfolio();
+});
+
+function filterByCategory(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === cat);
+  });
+  updatePortfolio();
+  document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+let lbCurrentItem = null;
+let lbCurrentImgIndex = 0;
+
+function openLightbox(id) {
+  const item = (storeData.items || []).find(i => i.id === id);
+  if (!item) return;
+  lbCurrentItem = item;
+  lbCurrentImgIndex = 0;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Track item view
+  trackItemView(item.id, item.title_en);
+}
+
+function renderLightbox() {
+  const item = lbCurrentItem;
+  if (!item) return;
+  const images = (item.images && item.images.length) ? item.images : [''];
+  const imgSrc = images[lbCurrentImgIndex] || '';
+
+  const imgEl = document.getElementById('lb-img');
+  const catEl = document.getElementById('lb-cat');
+  const titleEl = document.getElementById('lb-title');
+  const descEl = document.getElementById('lb-desc');
+  const dateEl = document.getElementById('lb-date');
+  const navEl = document.getElementById('lb-nav');
+  const dlBtn = document.getElementById('lb-download-btn');
+  const dlText = document.getElementById('lb-download-text');
+  const dlHint = document.getElementById('lb-download-hint');
+
+  imgEl.src = imgSrc;
+  imgEl.alt = item['title_' + currentLang] || item.title_en;
+  catEl.textContent = getCatLabel(item.category);
+  titleEl.textContent = item['title_' + currentLang] || item.title_en;
+  descEl.textContent = item['description_' + currentLang] || item.description_en;
+  dateEl.textContent = item.date ? new Date(item.date).toLocaleDateString(currentLang === 'ar' ? 'ar-MA' : 'en-US', { year:'numeric', month:'long', day:'numeric' }) : '';
+
+  // Download button
+  if (imgSrc) {
+    dlBtn.style.display = 'flex';
+    dlHint.style.display = 'block';
+    // Pass itemId + titleEn so the analytics wrapper can track per-item downloads
+    const itemId  = item.id;
+    const titleEn = item.title_en;
+    dlBtn.onclick = (e) => {
+      e.preventDefault();
+      downloadImage(imgSrc, (item['title_' + currentLang] || item.title_en), itemId, titleEn);
+    };
+    dlText.textContent = currentLang === 'ar' ? 'تحميل الصورة' : 'Download Image';
+    dlHint.textContent = currentLang === 'ar' ? 'دقة عالية · تحميل مجاني' : 'High resolution · Free download';
+  } else {
+    dlBtn.style.display = 'none';
+    dlHint.style.display = 'none';
+  }
+
+  // Thumbnail nav (only if multiple images)
+  if (images.length > 1) {
+    navEl.innerHTML = images.map((src, i) => `
+      <img class="lb-thumb ${i === lbCurrentImgIndex ? 'active' : ''}"
+           src="${src}" alt="Image ${i+1}"
+           onclick="switchLbImage(${i})"
+           onerror="this.style.display='none'" />
+    `).join('');
+  } else {
+    navEl.innerHTML = '';
+  }
+}
+
+function switchLbImage(idx) {
+  lbCurrentImgIndex = idx;
+  renderLightbox();
+}
+
+function downloadImage(src, name, itemId, titleEn) {
+  // Track download
+  if (itemId) trackDownload(itemId, titleEn || name);
+  // Sanitise filename
+  const filename = (name || 'btm-design').replace(/[^a-zA-Z0-9\u0600-\u06FF\s_-]/g, '').trim().replace(/\s+/g, '-') + '.jpg';
+
+  fetch(src)
+    .then(res => res.blob())
+    .then(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    })
+    .catch(() => {
+      // Fallback: open in new tab if CORS blocks fetch
+      window.open(src, '_blank');
+    });
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ── CURSOR ────────────────────────────────────────────────────────
+const cursorDot = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursorDot.style.left = mx + 'px';
+  cursorDot.style.top = my + 'px';
+});
+
+function animateCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// ── REVEAL ON SCROLL ──────────────────────────────────────────────
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── MOBILE NAV ────────────────────────────────────────────────────
+function toggleMobileNav() {
+  document.getElementById('main-nav').classList.toggle('open');
+}
+
+document.querySelectorAll('#main-nav a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('main-nav').classList.remove('open'));
+});
+
+// ── LIVE STORAGE UPDATES ──────────────────────────────────────────
+window.addEventListener('storage', e => {
+  if (e.key === BTM_STORE_KEY) {
+    storeData = btmLoad();
+    updateHero();
+    updateAbout();
+    updatePortfolio();
+    updateContactInfo();
+  }
+});
+
+// ── ANALYTICS ENGINE ──────────────────────────────────────────────
+// Writes into 'btm_analytics' — same key the Admin dashboard reads.
+const BTM_ANALYTICS_KEY = 'btm_analytics';
+
+function analyticsLoad() {
+  try {
+    const raw = localStorage.getItem(BTM_ANALYTICS_KEY);
+    if (!raw) return analyticsInit();
+    const parsed = JSON.parse(raw);
+    const defaults = analyticsInit();
+    return {
+      totalViews:     Number(parsed.totalViews)     || Number(parsed.totalVisits)     || 0,
+      totalDownloads: Number(parsed.totalDownloads) || 0,
+      daily:          (parsed.daily && typeof parsed.daily === 'object')                 ? parsed.daily         : defaults.daily,
+      itemViews:      (parsed.itemViews && typeof parsed.itemViews === 'object')         ? parsed.itemViews     : defaults.itemViews,
+      itemDownloads:  (parsed.itemDownloads && typeof parsed.itemDownloads === 'object') ? parsed.itemDownloads : defaults.itemDownloads,
+      activity:       Array.isArray(parsed.activity) ? parsed.activity : defaults.activity,
+    };
+  } catch(e) { return analyticsInit(); }
+}
+function analyticsInit() {
+  return { totalViews: 0, totalDownloads: 0, daily: {}, itemViews: {}, itemDownloads: {}, activity: [] };
+}
+function analyticsSave(a) {
+  try { localStorage.setItem(BTM_ANALYTICS_KEY, JSON.stringify(a)); } catch(e) {}
+}
+function analyticsDateKey() { return new Date().toISOString().split('T')[0]; }
+
+function trackPageView() {
+  const a = analyticsLoad();
+  const dk = analyticsDateKey();
+  a.totalViews = (a.totalViews || 0) + 1;
+  if (!a.daily[dk]) a.daily[dk] = { views: 0, downloads: 0 };
+  a.daily[dk].views = (a.daily[dk].views || 0) + 1;
+  // Trim daily to last 30 days
+  const dayKeys = Object.keys(a.daily).sort();
+  if (dayKeys.length > 30) dayKeys.slice(0, dayKeys.length - 30).forEach(k => delete a.daily[k]);
+  analyticsSave(a);
+}
+
+function trackItemView(itemId, titleEn) {
+  const a = analyticsLoad();
+  if (!a.itemViews) a.itemViews = {};
+  a.itemViews[itemId] = (a.itemViews[itemId] || 0) + 1;
+  if (!a.activity) a.activity = [];
+  a.activity.unshift({ type: 'view', id: itemId, title: titleEn || itemId, ts: new Date().toISOString() });
+  if (a.activity.length > 100) a.activity = a.activity.slice(0, 100);
+  analyticsSave(a);
+}
+
+function trackDownload(itemId, titleEn) {
+  const a = analyticsLoad();
+  const dk = analyticsDateKey();
+  a.totalDownloads = (a.totalDownloads || 0) + 1;
+  if (!a.daily[dk]) a.daily[dk] = { views: 0, downloads: 0 };
+  a.daily[dk].downloads = (a.daily[dk].downloads || 0) + 1;
+  if (!a.itemDownloads) a.itemDownloads = {};
+  a.itemDownloads[itemId] = (a.itemDownloads[itemId] || 0) + 1;
+  if (!a.activity) a.activity = [];
+  a.activity.unshift({ type: 'download', id: itemId, title: titleEn || itemId, ts: new Date().toISOString() });
+  if (a.activity.length > 100) a.activity = a.activity.slice(0, 100);
+  analyticsSave(a);
+}
+
+// Track page view once per session per day
+(function() {
+  const svKey = 'btm_sv_' + analyticsDateKey();
+  if (!sessionStorage.getItem(svKey)) { trackPageView(); sessionStorage.setItem(svKey, '1'); }
+})();
+
+// ── INIT ──────────────────────────────────────────────────────────
+updateHero();
+updateAbout();
+updatePortfolio();
+updateContactInfo();
+
+// Keep data fresh when switching from admin tab
+window.addEventListener('focus', () => {
+  storeData = btmLoad();
+  updateHero();
+  updateAbout();
+  updatePortfolio();
+  updateContactInfo();
+});
+</script>
+</body>
+</html>
